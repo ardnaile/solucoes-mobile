@@ -1,11 +1,8 @@
 package com.eliandra.lista_de_contatos
 
-import android.graphics.Color
-import android.graphics.Paint.Align
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -15,11 +12,12 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
 import androidx.compose.material3.ElevatedButton
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -43,22 +41,24 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun CriaLinhaCalculadora(numeros: List<Int>, modifier: Modifier = Modifier){
+fun CriaLinhaCalculadora(simbolos: List<String>, modifier: Modifier = Modifier){
     Row (
         horizontalArrangement = Arrangement.Center,
-        modifier = Modifier.fillMaxWidth().padding(3.dp)
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(3.dp)
     ) {
-        for (numero in numeros) {
+        for (simbolo in simbolos) {
             Column(
                 modifier = Modifier.padding(3.dp)
             ){
                 ElevatedButton(
                     onClick = {},
-                    modifier = Modifier.size(80.dp, 60.dp),
+                    modifier = Modifier.size(72.dp),
                     shape = RoundedCornerShape(4.dp)
                 ) {
                     Text(
-                        "$numero",
+                        "$simbolo",
                         fontSize = 24.sp
                     )
                 }
@@ -66,65 +66,22 @@ fun CriaLinhaCalculadora(numeros: List<Int>, modifier: Modifier = Modifier){
         }
     }
 }
-
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Calculator(modifier: Modifier = Modifier) {
-    Column(
+    Column (
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxSize()
     ) {
-        Column(){
-            Row(){}
-            Row(){}
-            Row(){}
-            Row(){}
-        }
-        Column(){
-            Row(){}
-            Row(){}
-            Row(){}
-            Row(){}
-        }
-        Column(){
-            Row(){}
-            Row(){}
-            Row(){}
-            Row(){}
-        }
-        Column(){
-            Row(){}
-            Row(){}
-            Row(){}
-            Row(){}
-        }
+        TextField(value = "0", onValueChange = {}, modifier = Modifier.padding(5.dp))
+        CriaLinhaCalculadora(listOf("1", "2", "3", "/"))
+        CriaLinhaCalculadora(listOf("4", "5", "6", "*"))
+        CriaLinhaCalculadora(listOf("7", "8", "9", "-"))
+        CriaLinhaCalculadora(listOf("C", "0", "=", "+"))
     }
+
 }
-//@Composable
-//fun Calculator(modifier: Modifier = Modifier) {
-//    Column (
-//        verticalArrangement = Arrangement.Center,
-//        modifier = Modifier.fillMaxHeight()
-//    ) {
-//        CriaLinhaCalculadora(listOf(1, 2, 3))
-//        CriaLinhaCalculadora(listOf(4, 5, 6))
-//        CriaLinhaCalculadora(listOf(7, 8, 9))
-//        Row (
-//            horizontalArrangement = Arrangement.Center,
-//            modifier = Modifier.fillMaxWidth()
-//
-//        ){
-//            ElevatedButton(
-//                onClick = {},
-//                modifier = Modifier.size(80.dp, 60.dp),
-//                shape = RoundedCornerShape(4.dp)) {
-//                Text("0",
-//                    fontSize = 24.sp)
-//            }
-//        }
-//    }
-//
-//}
 
 @Preview(showBackground = true)
 @Composable
