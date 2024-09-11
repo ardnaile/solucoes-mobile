@@ -10,12 +10,27 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.room.Room
 import br.edu.satc.todolistcompose.ui.screens.HomeScreen
 import br.edu.satc.todolistcompose.ui.theme.ToDoListComposeTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // inicializar o banco de dados
+        val db = Room.databaseBuilder(
+            applicationContext,
+            AppDatabase::class.java, "br.edu.satc.todolistcompose"
+        )
+            .allowMainThreadQueries()// habilita o uso do Room em Activitys normais
+            .build()
+
+        // inicializar o dao
+        val tarefaDao = db.TarefaDao()
+
+        // pegar todas as tarefas cadastradas no banco
+        val tarefas: List<Tarefa> = tarefaDao.getAll()
 
         setContent {
             ToDoListComposeTheme {

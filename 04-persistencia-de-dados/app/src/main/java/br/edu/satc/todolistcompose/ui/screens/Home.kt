@@ -39,11 +39,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import br.edu.satc.todolistcompose.Tarefa
 import br.edu.satc.todolistcompose.TaskData
 import br.edu.satc.todolistcompose.ui.components.TaskCard
 import kotlinx.coroutines.launch
 
-
+//tarefas: List<Tarefa>, addTarefa: (tarefa: Tarefa) -> Unit
 @Preview(showBackground = true)
 @Composable
 fun HomeScreen() {
@@ -126,7 +127,8 @@ fun HomeScreen() {
 }
 
 @Composable
-fun HomeContent(innerPadding: PaddingValues) {
+fun HomeContent(innerPadding: PaddingValues, tarefas: List<Tarefa>) {
+    var tarefas by remember { mutableStateOf(tarefas) }
 
     val tasks = mutableListOf<TaskData>()
     for (i in 0..5) {
@@ -151,8 +153,8 @@ fun HomeContent(innerPadding: PaddingValues) {
             ),
         verticalArrangement = Arrangement.Top
     ) {
-        for (task in tasks) {
-            TaskCard(task.title, task.description, task.complete)
+        for (task in tarefas) {
+            TaskCard(task.titulo, task.descricao, task.complete)
         }
     }
 }
@@ -196,10 +198,12 @@ fun NewTask(showBottomSheet: Boolean, onComplete: () -> Unit) {
                     value = taskDescription,
                     onValueChange = {taskDescription = it},
                     label = { Text(text = "Descrição da tarefa") })
-                Button(modifier = Modifier.padding(top = 4.dp), onClick = {
+                Button(modifier = Modifier.padding(top = 4.dp),
+                    onClick = {
                     scope.launch { sheetState.hide() }.invokeOnCompletion {
                         if (!sheetState.isVisible) {
                             onComplete()
+                            val novaTarefa:Tarefa = Tarefa(0, taskTitle, taskDescription)
                         }
                     }
                 }) {
