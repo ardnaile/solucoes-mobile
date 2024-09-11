@@ -12,45 +12,45 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
-fun tela1() {
+fun tela1(onNavigateToScreen2: () -> Unit, onNavigateToScreen3: () -> Unit) {
     Column(modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center){
         Text("Tela 1")
-        Button(onClick = {}){
+        Button(onClick = { onNavigateToScreen2()}){
             Text(text = "Go tela 2")
         }
-        Button(onClick = {}){
+        Button(onClick = { onNavigateToScreen3()}){
             Text(text = "Go tela 3")
         }
     }
 }
 
 @Composable
-fun tela2() {
+fun tela2(onNavigateToScreen1: () -> Unit, onNavigateToScreen3: () -> Unit) {
     Column(modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center){
         Text("Tela 2")
-        Button(onClick = {}){
+        Button(onClick = {onNavigateToScreen1()}){
             Text(text = "Go tela 1")
         }
-        Button(onClick = {}){
+        Button(onClick = {onNavigateToScreen3()}){
             Text(text = "Go tela 3")
         }
     }
 }
 
 @Composable
-fun tela3() {
+fun tela3(onNavigateToScreen1: () -> Unit, onNavigateToScreen2: () -> Unit) {
     Column(modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center){
         Text("Tela 3")
-        Button(onClick = {}){
+        Button(onClick = {onNavigateToScreen1()}){
             Text(text = "Go tela 1")
         }
-        Button(onClick = {}){
+        Button(onClick = {onNavigateToScreen2()}){
             Text(text = "Go tela 2")
         }
     }
@@ -59,5 +59,5 @@ fun tela3() {
 @Preview(showBackground = true)
 @Composable
 fun PreviewTelas(){
-    tela1()
+    tela1({}, {})
 }
