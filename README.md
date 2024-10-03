@@ -12,3 +12,6 @@ Desenvolvimento de um aplicativo com navegação entre telas. Resolução [aqui]
 ### Exercício 04 - Persistência de dados
 Desenvolvimento da parte de persistência de dados de um app de To Do List com Room. Resolução [aqui](https://github.com/ardnaile/solucoes-mobile/tree/main/04-persistencia-de-dados).
 
+### Exercício 05 - Conferir números com React Native
+Desenvolvimento de um app em React Native com Expo que contem um input onde o usuário digita um número e ao pressionar no botão, o sistema verifica e lança um Alert conforme a resposta. Resolução no [Snack](https://snack.expo.dev/@ardnaile/numbercheckapp).
+
