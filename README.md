@@ -16,4 +16,7 @@ Desenvolvimento da parte de persistência de dados de um app de To Do List com K
 Desenvolvimento de um app para compreender o básico do desenvolvimento em React Native com Expo. Resolução no [Snack](https://snack.expo.dev/@ardnaile/05conferirnumerosreact).
 
 ### Exercício 06 - Calculadora em React Native
-Desenvolvimento de uma calculadora para compreender o uso de componentes e hooks no React Native. Resolução no [Snack](https://snack.expo.dev/@ardnaile/06calculadorareact) 
+Desenvolvimento de uma calculadora para compreender o uso de componentes e hooks no React Native. Resolução no [Snack](https://snack.expo.dev/@ardnaile/06calculadorareact).
+
+### Exercício 07 - Navegação com React Navigation
+Desenvolvimento de um app em React Native usando Expo que demonstre o uso da ferramenta React Navigation e o consumo de APIs REST. Resolução no [Snack](https://snack.expo.dev/@ardnaile/07navigationreact).
