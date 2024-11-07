@@ -11,6 +11,11 @@ import {
 } from "react-native-paper";
 import myColors from "./assets/colors.json";
 import myColorsDark from "./assets/colorsDark.json";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as Location from 'expo-location';
+import * as SQLite from 'expo-sqlite';
+import { getAllLocations, insertLocation } from "./db";
+
 
 export default function App() {
   const [isSwitchOn, setIsSwitchOn] = useState(false); // variável para controle do darkMode
@@ -26,11 +31,15 @@ export default function App() {
   });
 
   // load darkMode from AsyncStorage
-  async function loadDarkMode() {}
+  async function loadDarkMode() {
+    const darkMode = await AsyncStorage.getItem('@darkMode')
+    setIsSwitchOn(darkMode == "1" ? true : false)
+  }
 
   // darkMode switch event
   async function onToggleSwitch() {
     setIsSwitchOn(!isSwitchOn);
+    await AsyncStorage.setItem('@darkMode', !isSwitchOn ? "1" : "0")
   }
 
   // get location (bottao capturar localização)
@@ -38,10 +47,27 @@ export default function App() {
     setIsLoading(true);
 
     // Localização fake, substituir por localização real do dispositivo
-    const coords = {
-      latitude: -23.5505199,
-      longitude: -46.6333094,
-    };
+    // const coords = {
+    //   latitude: -23.5505199,
+    //   longitude: -46.6333094,
+    // };
+
+    let { status } = await Location.requestForegroundPermissionsAsync();
+    if (status !== 'granted') {
+      setErrorMsg('Permission to access location was denied');
+      return;
+    }
+
+    let location = await Location.getCurrentPositionAsync({});
+    console.log("localatual",location);
+    const newLocation = {...location.coords};
+    const retornoInsert = await insertLocation(location.coords);
+    
+    //loadLocations(); //recarrega tudo do db
+
+    newLocation.id = retornoInsert.lastInsertRowId;
+    //setLocations((prevItens) => [...prevItens, location.coords]);
+    setLocations((eli)=>[...eli, newLocation])
 
     setIsLoading(false);
   }
@@ -50,15 +76,18 @@ export default function App() {
   async function loadLocations() {
     setIsLoading(true);
 
+    const locations = await getAllLocations();
+    console.log("fromdb", locations);
+
     // generate fake locations
-    const locations = [];
-    for (let i = 0; i < 5; i++) {
-      locations.push({
-        id: i,
-        latitude: -23.5505199 + i,
-        longitude: -46.6333094 + i,
-      });
-    }
+    // const locations = [];
+    // for (let i = 0; i < 5; i++) {
+    //   locations.push({
+    //     id: i,
+    //     latitude: -23.5505199 + i,
+    //     longitude: -46.6333094 + i,
+    //   });
+    // }
 
     setLocations(locations);
     setIsLoading(false);
