@@ -20,3 +20,6 @@ Desenvolvimento de uma calculadora para compreender o uso de componentes e hooks
 
 ### Exercício 07 - Navegação com React Navigation
 Desenvolvimento de um app em React Native usando Expo que demonstre o uso da ferramenta React Navigation e o consumo de APIs REST. Resolução no [Snack](https://snack.expo.dev/@ardnaile/07navigationreact).
+
+### Exercício 08 - Persistência de dados com SQLite e AsyncStorage
+Implementação de AsyncStorage para guardar a preferência de DarkMode do usuário e SQLite para guardar as localizações no banco. Resolução no branch 08-Peristencia-React, ou na pasta de mesmo nome.
